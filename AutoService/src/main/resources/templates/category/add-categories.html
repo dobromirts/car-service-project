@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+</header>
+<main>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="d-none d-md-flex col-md-4 col-lg-4 bg-image-home"></div>
+            <div class="col-md-8 col-lg-6">
+                <div class="login d-flex align-items-center py-5">
+                    <div class="container ml-5">
+                        <div class="jumbotron">
+                            <form class="mx-auto w-25" th:method="post" th:action="@{/categories/add}">
+                                <div class="form-group">
+                                    <label for="name" class="text-black mb-1">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Category name..." name="name">
+                                </div>
+                                <hr class="bg-hero hr-2"/>
+                                <div class="button-holder mt-3 d-flex justify-content-center">
+                                    <button type="submit" class="btn bg-hero glow-button">Add category</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</footer>
+</body>
+</html>
