@@ -1,24 +1,26 @@
 package com.tsvetkov.autoservice.service;
 
+import com.tsvetkov.autoservice.domain.entities.CarModel;
 import com.tsvetkov.autoservice.domain.entities.Category;
 import com.tsvetkov.autoservice.domain.entities.Part;
-import com.tsvetkov.autoservice.domain.models.service.CategoryServiceModel;
 import com.tsvetkov.autoservice.domain.models.service.PartServiceModel;
+import com.tsvetkov.autoservice.repository.CarModelRepository;
 import com.tsvetkov.autoservice.repository.PartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class PartServiceImpl implements PartService {
     private final PartRepository partRepository;
+    private final CarModelService carModelService;
     private final ModelMapper modelMapper;
 
-    public PartServiceImpl(PartRepository partRepository, ModelMapper modelMapper) {
+    public PartServiceImpl(PartRepository partRepository, CarModelService carModelService, ModelMapper modelMapper) {
         this.partRepository = partRepository;
+        this.carModelService = carModelService;
         this.modelMapper = modelMapper;
     }
 
@@ -53,5 +55,13 @@ public class PartServiceImpl implements PartService {
     @Override
     public void deletePart(String id) {
         this.partRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PartServiceModel> findAllPartsByModel(String id) {
+        CarModel carModel=this.modelMapper.map(this.carModelService.findModelById(id),CarModel.class);
+
+        List<Part> allPartsByCarModels = this.partRepository.findAllPartsByCarModels(carModel);
+        return allPartsByCarModels.stream().map(p->this.modelMapper.map(p,PartServiceModel.class)).collect(Collectors.toList());
     }
 }

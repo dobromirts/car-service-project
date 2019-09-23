@@ -1,11 +1,13 @@
 package com.tsvetkov.autoservice.web.controllers;
 
 import com.tsvetkov.autoservice.domain.models.binding.PartAddBindingModel;
+import com.tsvetkov.autoservice.domain.models.service.CarModelServiceModel;
 import com.tsvetkov.autoservice.domain.models.service.CategoryServiceModel;
 import com.tsvetkov.autoservice.domain.models.service.PartServiceModel;
 import com.tsvetkov.autoservice.domain.models.view.CategoriesAllViewModel;
 import com.tsvetkov.autoservice.domain.models.view.PartAllViewModel;
 import com.tsvetkov.autoservice.domain.models.view.PartDetailsViewModel;
+import com.tsvetkov.autoservice.service.CarModelService;
 import com.tsvetkov.autoservice.service.CategoryService;
 import com.tsvetkov.autoservice.service.CloudinaryService;
 import com.tsvetkov.autoservice.service.PartService;
@@ -25,13 +27,15 @@ import java.util.stream.Collectors;
 public class PartController {
     private final CategoryService categoryService;
     private final PartService partService;
+    private final CarModelService carModelService;
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PartController(CategoryService categoryService, PartService partService, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public PartController(CategoryService categoryService, PartService partService, CarModelService carModelService, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.categoryService = categoryService;
         this.partService = partService;
+        this.carModelService = carModelService;
         this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
@@ -55,8 +59,12 @@ public class PartController {
 
         List<CategoryServiceModel> categoryServiceModels = partAddBindingModel.getCategories().stream()
                 .map(this.categoryService::findCategoryById).collect(Collectors.toList());
+
+        List<CarModelServiceModel> carModelServiceModels = partAddBindingModel.getCarModels().stream()
+                .map(this.carModelService::findModelById).collect(Collectors.toList());
 //        partServiceModel.getCategories().clear();
         partServiceModel.setCategories(categoryServiceModels);
+        partServiceModel.setCarModels(carModelServiceModels);
 
         partServiceModel.setImageUrl(this.cloudinaryService.uploadImage(partAddBindingModel.getImage()));
         //TODO THIS SHOULD BE IN THE SERVICE
@@ -121,7 +129,7 @@ public class PartController {
     }
 
     @GetMapping("/details/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView detailsPart(@PathVariable String id,ModelAndView modelAndView) {
         PartDetailsViewModel partDetailsViewModel=this.modelMapper.map(this.partService.findPartById(id),PartDetailsViewModel.class);
         modelAndView.addObject("model",partDetailsViewModel);

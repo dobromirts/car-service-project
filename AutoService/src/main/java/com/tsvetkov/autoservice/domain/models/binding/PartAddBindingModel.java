@@ -14,6 +14,7 @@ public class PartAddBindingModel {
     private BigDecimal price;
     private MultipartFile image;
     private List<String> categories;
+    private List<String> carModels;
 
     public PartAddBindingModel() {
     }
@@ -56,5 +57,13 @@ public class PartAddBindingModel {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
+    }
+
+    public List<String> getCarModels() {
+        return carModels;
+    }
+
+    public void setCarModels(List<String> carModels) {
+        this.carModels = carModels;
     }
 }

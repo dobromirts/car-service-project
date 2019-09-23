@@ -12,6 +12,8 @@ public class Part extends BaseEntity{
     private BigDecimal price;
     private String imageUrl;
     private List<Category>categories;
+    private List<CarModel>carModels;
+
 
 
     public Part() {
@@ -61,4 +63,14 @@ public class Part extends BaseEntity{
         this.categories = categories;
     }
 
+    @ManyToMany(targetEntity = CarModel.class)
+    @JoinTable(name = "parts_models",joinColumns = @JoinColumn(name = "part_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "model_id",referencedColumnName = "id"))
+    public List<CarModel> getCarModels() {
+        return carModels;
+    }
+
+    public void setCarModels(List<CarModel> carModels) {
+        this.carModels = carModels;
+    }
 }

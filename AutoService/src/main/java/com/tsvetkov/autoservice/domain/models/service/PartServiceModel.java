@@ -12,6 +12,7 @@ public class PartServiceModel {
     private BigDecimal price;
     private String imageUrl;
     private List<CategoryServiceModel> categories;
+    private List<CarModelServiceModel> carModels;
 
     public PartServiceModel() {
     }
@@ -62,5 +63,13 @@ public class PartServiceModel {
 
     public void setCategories(List<CategoryServiceModel> categories) {
         this.categories = categories;
+    }
+
+    public List<CarModelServiceModel> getCarModels() {
+        return carModels;
+    }
+
+    public void setCarModels(List<CarModelServiceModel> carModels) {
+        this.carModels = carModels;
     }
 }

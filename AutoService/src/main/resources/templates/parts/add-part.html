@@ -42,6 +42,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="add-product-models" class="font-weight-bold">Models</label>
+                                    <select multiple="multiple" class="form-control" id="add-product-models" name="carModels">
+                                        <option selected="" disabled="">--- Select Models ---</option>
+                                        <!--<th:block th:each="category, iter: ${model}">-->
+                                        <!--<option th:value="${category.id}" th:text="${category.name}">}</option>-->
+                                        <!--</th:block>-->
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="add-product-image" class="font-weight-bold">Image</label>
                                     <input type="file" class="form-control-file" id="add-product-image" name="image">
                                 </div>
@@ -66,6 +76,14 @@
         .then((response) => response.json())
         .then((json) => {
             json.forEach((category) => $('#add-product-categories').append(`<option value="${category.id}">${category.name}</option>`));
+        })
+        .catch((err) => console.log(err));
+</script>
+<script>
+    fetch('/models/fetch')
+        .then((response) => response.json())
+        .then((json) => {
+            json.forEach((carmodel) => $('#add-product-models').append(`<option value="${carmodel.id}">${carmodel.model}</option>`));
         })
         .catch((err) => console.log(err));
 </script>
