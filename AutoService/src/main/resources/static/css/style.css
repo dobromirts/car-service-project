@@ -1,0 +1,26 @@
+.bg-hero {
+    background: #343a40;
+    color: white;
+}
+
+.text-hero {
+    color: white;
+}
+
+.hr-2 {
+    height: 2px;
+}
+
+textarea {
+    resize: none;
+}
+
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: 0.75rem;
+}
+
+.home-doc{
+    width: 18%;
+    margin: auto;
+}

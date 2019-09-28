@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+</header>
+<main>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="d-none d-md-flex col-md-4 col-lg-4 bg-image-home"></div>
+            <div class="col-md-8 col-lg-8">
+                <div class="login  align-items-center py-5">
+                    <h1 class="text-center text-dark mt-4">Edit Part</h1>
+                    <hr class="hr-2 bg-dark w-25">
+                    <form class="form w-25 mx-auto" th:action="@{/parts/edit/{id}(id=${modelId})}" th:method="post">
+                        <div class="form-group">
+                            <label for="name" class="font-weight-bold">Name</label>
+                            <input type="text" th:value="${model.name}" class="form-control" name="name" id="name">
+                            <label for="name" class="font-weight-bold">Description</label>
+                            <textarea rows="8" th:text="${model.description}" class="form-control" name="description" id="description"></textarea>
+                            <label for="name" class="font-weight-bold">Price</label>
+                            <input type="text" th:value="${model.price}" class="form-control" name="price" id="price">
+                            <div class="form-group">
+                                <label for="add-product-categories" class="font-weight-bold">Categories</label>
+                                <select multiple="multiple" class="form-control" id="add-product-categories" name="categories">
+                                    <th:block th:each="category:${model.getCategories()}">
+                                        <option  th:text="${category}">}</option>
+                                    </th:block>
+                                </select>
+                            </div>
+                        <hr class="hr-2 bg-dark">
+                        <div class="button-holder d-flex justify-content-center">
+                            <button type="submit" class="btn btn-dark">Edit</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</footer>
+</body>
+<!--<script th:inline="javascript">-->
+    <!--fetch('/categories/fetch')-->
+        <!--.then((response) => response.json())-->
+        <!--.then((json) => {-->
+            <!--let categories = [[${model.categories}]];-->
+            <!--console.log(categories);-->
+            <!--json.forEach((category) =>-->
+                <!--$('#add-product-categories').append(-->
+                    <!--categories.includes(category.name)-->
+                        <!--? `<option value="${category.id}" selected>${category.name}</option>`-->
+                        <!--: `<option value="${category.id}">${category.name}</option>`));-->
+        <!--})-->
+        <!--.catch((err) => console.log(err));-->
+<!--</script>-->
+</html>
