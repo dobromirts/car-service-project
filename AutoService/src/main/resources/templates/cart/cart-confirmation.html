@@ -23,25 +23,36 @@
                                 perferendis quis sed ut.</p>
                         </div>
                         <div class="jumbotron">
-                            <form class="mx-auto w-50" th:method="post" th:action="@{/cart/order}">
+                            <form class="mx-auto w-50" th:method="post" th:action="@{/cart/order}" th:object="${model}">
                                 <div class="form-group">
                                     <label for="personName" class="text-black mb-1">Your name</label>
-                                    <input type="text" class="form-control" id="personName" placeholder="Enter your name..."
-                                           name="personName">
+                                    <input type="text" class="form-control" id="personName"
+                                           placeholder="Enter your name..."
+                                           name="personName" th:value="*{personName}" required>
+                                    <th:block th:if="${#fields.hasErrors('personName')}">
+                                        <small th:errors="*{personName}" style="color: red"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
                                     <label for="phoneNumber" class="text-black mb-1">Phone number</label>
                                     <input type="number" class="form-control" id="phoneNumber"
-                                           placeholder="Phone number..." name="phoneNumber">
+                                           placeholder="Phone number..." name="phoneNumber" th:value="*{phoneNumber}" required>
+                                    <th:block th:if="${#fields.hasErrors('phoneNumber')}">
+                                        <small th:errors="*{phoneNumber}" style="color: red"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="text-black mb-1">Additional description</label>
                                     <textarea rows="5" class="form-control" id="description"
-                                              placeholder="If you want to tell additional information about your problem" name="description"></textarea>
+                                              placeholder="If you want to tell additional information about your problem"
+                                              name="description" th:value="*{description}"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="date" class="text-black mb-1">Choose date</label>
-                                    <input type="date" class="form-control" id="date" name="date">
+                                    <input type="datetime-local" class="form-control" id="date" name="date" th:value="*{date}" required>
+                                    <th:block th:if="${#fields.hasErrors('date')}">
+                                        <small th:errors="*{date}" style="color: red"></small>
+                                    </th:block>
                                 </div>
                                 <div class="button-holder mt-3 d-flex justify-content-center">
                                     <button type="submit" class="btn bg-hero glow-button">Order</button>

@@ -14,25 +14,29 @@
             <div class=" col-md-4 col-lg-4 bg-image-home"></div>
             <div class="col-md-8 col-lg-8">
                 <div class="login d-flex align-items-center ">
-                    <div class="container ml-8">
+                    <div class="container ml-2">
 
-                        <div class="jumbotron text-center pt-4">
+                        <div class="jumbotron bg-light text-center pt-4">
+                            <h1 class="text-center font-weight-bolder">All Car Models</h1>
+                            <hr class="hr-2 bg-dark w-75">
 
                             <table class="table table-hover w-75 mx-auto">
-                                <h1 class="text-center text-monospace">All car models</h1>
-                                <hr class="hr-2 bg-dark w-75">
+
                                 <tr>
-                                    <th class=" text-monospace"></th>
+                                    <th class=" text-monospace">#</th>
                                     <th class="text-monospace">Name</th>
+                                    <th class="text-monospace">Horse Power</th>
+                                    <th class="text-monospace">Actions</th>
 
                                 </tr>
                                 <th:block th:each="carModel ,iter: ${model}">
                                 <tr>
                                     <td th:text="${iter.index+1}"></td>
                                     <td th:text="${carModel.model}"></td>
+                                    <td th:text="${carModel.horsePower}"></td>
                                     <td>
-                                        <a th:href="@{/categories/edit/{id}(id=${carModel.getId()})}" class="btn btn-danger">Edit</a>
-                                        <a th:href="@{/categories/delete/{id}(id=${carModel.getId()})}" class="btn btn-danger">Delete</a>
+                                        <a th:href="@{/models/edit/{id}(id=${carModel.getId()})}" class="btn btn-success ml-2">Edit</a>
+                                        <a th:href="@{/models/delete/{id}(id=${carModel.getId()})}" class="btn btn-danger ml-2">Delete</a>
                                     </td>
 
                                 </tr>

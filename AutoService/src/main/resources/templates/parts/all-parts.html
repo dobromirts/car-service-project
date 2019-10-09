@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -16,34 +16,47 @@
                 <div class="login d-flex align-items-center ">
                     <div class="container ml-8">
 
-                        <div class="jumbotron text-center pt-4">
+                        <div class="jumbotron bg-light text-center pt-4">
 
-                            <table class="table table-hover w-75 mx-auto">
-                                <h1 class="text-center text-monospace">All Parts</h1>
+                            <table class="table table-hover  mx-auto">
+                                <h1 class="text-center font-weight-bolder">All Parts</h1>
                                 <hr class="hr-2 bg-dark w-75">
                                 <tr>
                                     <th class=" text-monospace"></th>
                                     <th class="text-monospace">Image</th>
                                     <th class=" text-monospace">Name</th>
                                     <th class=" text-monospace">Price</th>
+                                    <th class=" text-monospace">Work Price</th>
+                                    <th class=" text-monospace">Models</th>
+                                    <th class=" text-monospace">Categories</th>
                                     <th class=" text-monospace">Actions</th>
                                 </tr>
                                 <th:block th:each="part,iter: ${model}">
-                                <tr>
+                                    <tr>
 
-                                    <td th:text="${iter.index+1}"></td>
-                                    <!--<td class="col-md-3"><div class="text-center"><img th:src="${part.imageUrl}" width="40" height="40" alt="Product"></div>-->
-                                    <td>
-                                        <div><img th:src="${part.imageUrl}" width="40" height="40" alt="Part"></div>
-                                    </td>
-                                    <td th:text="${part.name}"></td>
-                                    <td th:text="${part.price}"></td>
-                                    <td>
-                                        <a th:href="@{/parts/details/{id}(id=${part.getId()})}" class="btn btn-danger">Details</a>
-                                        <a th:href="@{/parts/edit/{id}(id=${part.getId()})}" class="btn btn-danger">Edit</a>
-                                        <a th:href="@{/parts/delete/{id}(id=${part.getId()})}" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
+                                        <td th:text="${iter.index+1}"></td>
+                                        <!--<td class="col-md-3"><div class="text-center"><img th:src="${PartAddValidator.imageUrl}" width="40" height="40" alt="Product"></div>-->
+                                        <td>
+                                            <div><img th:src="${part.imageUrl}" width="40" height="40" alt="Part"></div>
+                                        </td>
+                                        <td th:text="${part.name}"></td>
+                                        <td th:text="${part.price}"></td>
+                                        <td th:text="${part.workPrice}"></td>
+                                        <th:block th:each="model : ${part.carModels}">
+                                            <td th:text="${model.model}"></td>
+                                        </th:block>
+                                        <th:block th:each="model : ${part.categories}">
+                                            <td th:text="${model.name}"></td>
+                                        </th:block>
+                                        <td>
+                                            <a th:href="@{/parts/details/{id}(id=${part.getId()})}"
+                                               class="btn btn-success">Details</a>
+                                            <a th:href="@{/parts/edit/{id}(id=${part.getId()})}"
+                                               class="btn btn-success">Edit</a>
+                                            <a th:href="@{/parts/delete/{id}(id=${part.getId()})}"
+                                               class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
                                 </th:block>
                             </table>
                         </div>

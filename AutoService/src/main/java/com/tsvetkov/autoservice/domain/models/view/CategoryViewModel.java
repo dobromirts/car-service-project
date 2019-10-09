@@ -5,6 +5,7 @@ public class CategoryViewModel {
     private String name;
     private String imageUrl;
 
+
     public CategoryViewModel() {
     }
 

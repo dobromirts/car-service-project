@@ -8,5 +8,13 @@ public interface CarService {
 
     CarServiceModel addCar(CarServiceModel carServiceModel);
 
+    CarServiceModel findCarById(String id);
+
     List<CarServiceModel> findAllCars();
+
+    void deleteCar(String id);
+
+    CarServiceModel editCar(String id,CarServiceModel carServiceModel);
+
+    CarServiceModel findCarByBrand(String brand);
 }

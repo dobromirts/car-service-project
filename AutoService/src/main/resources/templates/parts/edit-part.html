@@ -24,11 +24,21 @@
                             <textarea rows="8" th:text="${model.description}" class="form-control" name="description" id="description"></textarea>
                             <label for="name" class="font-weight-bold">Price</label>
                             <input type="text" th:value="${model.price}" class="form-control" name="price" id="price">
+                            <label for="name" class="font-weight-bold">Price</label>
+                            <input type="text" th:value="${model.workPrice}" class="form-control" name="workPrice" id="workPrice">
                             <div class="form-group">
                                 <label for="add-product-categories" class="font-weight-bold">Categories</label>
                                 <select multiple="multiple" class="form-control" id="add-product-categories" name="categories">
                                     <th:block th:each="category:${model.getCategories()}">
                                         <option  th:text="${category}">}</option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-product-models" class="font-weight-bold">Models</label>
+                                <select multiple="multiple" class="form-control" id="add-product-models" name="carModels">
+                                    <th:block th:each="model:${model.getCarModels()}">
+                                        <option  th:text="${model}">}</option>
                                     </th:block>
                                 </select>
                             </div>

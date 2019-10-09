@@ -10,10 +10,11 @@ import java.util.List;
 public class CarModelServiceModel {
     private String id;
     private String model;
-
     private String horsePower;
-    private Car car;
+    private CarServiceModel car;
     private String imageUrl;
+
+    private Boolean isDeleted;
 
 
     public CarModelServiceModel() {
@@ -44,11 +45,11 @@ public class CarModelServiceModel {
         this.horsePower = horsePower;
     }
 
-    public Car getCar() {
+    public CarServiceModel getCar() {
         return car;
     }
 
-    public void setCar(Car car) {
+    public void setCar(CarServiceModel car) {
         this.car = car;
     }
 
@@ -58,5 +59,13 @@ public class CarModelServiceModel {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

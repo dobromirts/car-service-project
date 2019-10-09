@@ -14,29 +14,30 @@
             <div class=" col-md-4 col-lg-4 bg-image-home"></div>
             <div class="col-md-8 col-lg-8">
                 <div class="login d-flex align-items-center ">
-                    <div class="container ml-8">
+                    <div class="container ml-2">
 
-                        <div class="jumbotron text-center pt-4">
+                        <div class="jumbotron bg-light text-center pt-4">
 
                             <table class="table table-hover w-75 mx-auto">
-                                <h1 class="text-center text-monospace">All Cars</h1>
+                                <h1 class="text-center font-weight-bolder">All Cars</h1>
                                 <hr class="hr-2 bg-dark w-75">
                                 <tr>
                                     <th class=" text-monospace"></th>
                                     <th class="col-md-3 text-center">Image</th>
-                                    <th class="text-monospace">Name</th>
+                                    <th class="text-dark">Name</th>
+                                    <th class="text-dark">Actions</th>
 
                                 </tr>
                                 <th:block th:each="car ,iter: ${model}">
                                 <tr>
                                     <td th:text="${iter.index+1}"></td>
                                     <td>
-                                        <div><img th:src="${car.imageUrl}" width="40" height="40" alt="Part"></div>
+                                        <div><img th:src="${car.imageUrl}" width="40" height="40" alt="Car"></div>
                                     </td>
                                     <td th:text="${car.brand}"></td>
                                     <td>
-                                        <a th:href="@{/categories/edit/{id}(id=${car.getId()})}" class="btn btn-danger">Edit</a>
-                                        <a th:href="@{/categories/delete/{id}(id=${car.getId()})}" class="btn btn-danger">Delete</a>
+                                        <a th:href="@{/cars/edit/{id}(id=${car.getId()})}" class="btn btn-success mt-2">Edit</a>
+                                        <a th:href="@{/cars/delete/{id}(id=${car.getId()})}" class="btn btn-danger mt-2">Delete</a>
                                     </td>
 
                                 </tr>

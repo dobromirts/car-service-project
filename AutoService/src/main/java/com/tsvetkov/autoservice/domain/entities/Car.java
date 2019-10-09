@@ -7,17 +7,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cars")
-public class Car extends BaseEntity{
+public class Car extends BaseEntityExtension{
     private String brand;
 
     private String imageUrl;
 
-
-
     public Car() {
     }
 
-    @Column(name = "brand",nullable = false,unique = true)
+    @Column(name = "brand",nullable = false)
     public String getBrand() {
         return brand;
     }

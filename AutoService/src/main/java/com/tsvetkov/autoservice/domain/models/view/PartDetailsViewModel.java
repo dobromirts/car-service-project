@@ -8,6 +8,7 @@ public class PartDetailsViewModel {
     private String name;
     private String description;
     private BigDecimal price;
+    private BigDecimal workPrice;
     private String imageUrl;
 
 
@@ -52,5 +53,13 @@ public class PartDetailsViewModel {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public BigDecimal getWorkPrice() {
+        return workPrice;
+    }
+
+    public void setWorkPrice(BigDecimal workPrice) {
+        this.workPrice = workPrice;
     }
 }

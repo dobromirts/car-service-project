@@ -4,6 +4,7 @@ import com.tsvetkov.autoservice.domain.entities.CarModel;
 import com.tsvetkov.autoservice.domain.entities.Category;
 import com.tsvetkov.autoservice.domain.entities.Part;
 import com.tsvetkov.autoservice.domain.models.service.PartServiceModel;
+import com.tsvetkov.autoservice.error.PartNotFoundException;
 import com.tsvetkov.autoservice.repository.PartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public PartServiceModel findPartById(String id) {
-        Part part=this.partRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid part"));
+        Part part=this.partRepository.findById(id).orElseThrow(()->new PartNotFoundException("Part with given id was not found!"));
         return this.modelMapper.map(part,PartServiceModel.class);
     }
 
@@ -47,8 +48,9 @@ public class PartServiceImpl implements PartService {
         Part part=this.partRepository.findById(partServiceModel.getId()).orElseThrow(()->new IllegalArgumentException("Incorrect Part!"));
         part.setName(partServiceModel.getName());
         part.setDescription(partServiceModel.getDescription());
-        part.setPrice(partServiceModel.getPrice() );
+        part.setPrice(partServiceModel.getPrice());
         part.setCategories(partServiceModel.getCategories().stream().map(c->this.modelMapper.map(c, Category.class)).collect(Collectors.toList()));
+        part.setCarModels(partServiceModel.getCarModels().stream().map(m->this.modelMapper.map(m, CarModel.class)).collect(Collectors.toList()));
 
         return this.modelMapper.map(this.partRepository.saveAndFlush(part),PartServiceModel.class);
     }

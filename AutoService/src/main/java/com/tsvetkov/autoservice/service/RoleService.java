@@ -1,6 +1,5 @@
 package com.tsvetkov.autoservice.service;
 
-import com.tsvetkov.autoservice.domain.entities.Role;
 import com.tsvetkov.autoservice.domain.models.service.RoleServiceModel;
 
 

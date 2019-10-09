@@ -1,6 +1,6 @@
 package com.tsvetkov.autoservice.repository;
 
-import com.tsvetkov.autoservice.domain.entities.Car;
+
 import com.tsvetkov.autoservice.domain.entities.CarModel;
 import com.tsvetkov.autoservice.domain.entities.Category;
 import com.tsvetkov.autoservice.domain.entities.Part;
@@ -16,4 +16,5 @@ public interface PartRepository extends JpaRepository<Part,String> {
     List<Part> findAllPartsByCarModels(CarModel carModel);
 
     List<Part> findAllByCarModelsAndCategories(CarModel carModel, Category category);
+
 }

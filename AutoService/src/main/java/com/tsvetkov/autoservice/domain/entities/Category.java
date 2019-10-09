@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
-public class Category extends BaseEntity{
+public class Category extends BaseEntityExtension{
 
     private String name;
     private String imageUrl;
@@ -14,7 +14,7 @@ public class Category extends BaseEntity{
     public Category() {
     }
 
-    @Column(name = "name",nullable = false,unique = true)
+    @Column(name = "name",nullable = false)
     public String getName() {
         return name;
     }

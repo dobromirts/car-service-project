@@ -21,14 +21,14 @@
                 </div>
             </div>
         </div>
-        <div class="jumbotron">
-            <div class="print-container container-fluid">
+        <div class="jumbotron bg-light">
+            <div class="container-fluid">
                 <div class="row mb-4 d-flex flex-wrap">
                     <th:block th:each="car: ${model}">
                         <div class="print-scheduled home-doc rounded">
                             <h5 class="text-center text-dark font-weight-bold py-3 mt-3" th:text="${car.brand}"></h5>
-                            <div class="text-center"><a th:href ="@{/cars/{id}(id=${car.id})}"  ><img th:src="${car.imageUrl}" width="160"  alt="Car"></a></div>
-                            <hr class="bg-hero w-50">
+                            <div class="text-center"><a th:href ="@{/models/car/{id}(id=${car.id})}"  ><img th:src="${car.imageUrl}" width="160"  alt="Car"></a></div>
+                            <hr class="bg-hero w-75">
                             <div class="buttons-holder w-75 mx-auto d-flex justify-content-center">
                                 <a th:href ="@{/cars/{id}(id=${car.id})}" class="btn btn-dark text-white font-weight-bold mb-3" >Models</a>
                             </div>
@@ -37,13 +37,9 @@
                 </div>
             </div>
         </div>
-        <hr class="bg-exodia hr-2"/>
-
-        <hr class="bg-exodia hr-2 mt-5"/>
     </main>
-    <footer>
-        <th:block th:include="~{fragments/footer}"></th:block>
-    </footer>
-</div>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
 </body>
 </html>

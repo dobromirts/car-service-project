@@ -25,28 +25,32 @@
                                     <th class="text-monospace">Image</th>
                                     <th class=" text-monospace">Name</th>
                                     <th class=" text-monospace">Description</th>
-                                    <th class=" text-monospace">Price</th>
+                                    <th class=" text-monospace">Work Price</th>
+                                    <th class=" text-monospace">Part Price</th>
                                     <th class=" text-monospace">Quantity</th>
                                     <th class=" text-monospace">Remove</th>
                                 </tr>
                                 <th:block th:each="part:${#session.getAttribute('shopping-cart')}">
                                 <tr>
-                                    <!--<td class="col-md-3"><div class="text-center"><img th:src="${part.imageUrl}" width="40" height="40" alt="Part"></div>-->
+                                    <!--<td class="col-md-3"><div class="text-center"><img th:src="${PartAddValidator.imageUrl}" width="40" height="40" alt="Part"></div>-->
                                     <td>
                                         <div><img th:src="${part.part.imageUrl}" width="40" height="40" alt="Part"></div>
                                     </td>
                                     <td th:text="${part.part.name}"></td>
                                     <td th:text="${part.part.description}"></td>
+                                    <td th:text="${part.part.workPrice}"></td>
                                     <td th:text="${part.part.price}"></td>
                                     <td th:text="${part.quantity}"></td>
                                     <td>
-                                        <a th:href="@{/parts/details/{id}(id=${part.part.id})}" class="btn btn-danger">Remove</a>
+                                        <a th:href="@{/cart/remove/{id}(id=${part.part.id})}" class="btn btn-danger">Remove</a>
                                     </td>
                                 </tr>
                                 </th:block>
                             </table>
                             <hr class="hr-2 bg-dark">
                             <div class="text-center">
+                                <h3 th:text="|Total Parts Price: ${totalPartsPrice}|"></h3>
+                                <h3 th:text="|Total Work Price: ${totalWorkPrice}|"></h3>
                                 <h3 th:text="|Total: ${totalPrice}|"></h3>
                             </div>
 

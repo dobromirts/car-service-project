@@ -1,6 +1,6 @@
 <th:block>
     <th:block sec:authorize="isAnonymous()">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-hero fixed-top">
             <div class="container">
                 <a class="navbar-brand" th:href="@{/}">Tim Auto</a>
 
@@ -8,16 +8,15 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link" th:href="@{/}">Home
-                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link " th:href="@{/users/login}">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link " th:href="@{/users/register}">Register</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link " th:href="@{/contacts}">Contacts</a>
                         </li>
                     </ul>
@@ -26,7 +25,7 @@
         </nav>
     </th:block>
     <th:block sec:authorize="isAuthenticated()">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-hero fixed-top">
             <div class="container">
                 <a class="navbar-brand" th:href="@{/home}">Tim Auto</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userNav"
@@ -42,22 +41,6 @@
                         </li>
 
                         <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-
-                            <!--<li class="nav-item active">-->
-                            <!--<a class="nav-link" th:href="@{/categories/add}">Add category</a>-->
-                            <!--</li>-->
-                            <!--<li class="nav-item active">-->
-                            <!--<a class="nav-link" th:href="@{/categories/all}">All Categories</a>-->
-                            <!--</li>-->
-                            <!--<li class="nav-item active">-->
-                            <!--<a class="nav-link" th:href="@{/users/all}">All Users</a>-->
-                            <!--</li>-->
-                            <!--<li class="nav-item active">-->
-                            <!--<a class="nav-link" th:href="@{/parts/add}">Add parts</a>-->
-                            <!--</li>-->
-                            <!--<li class="nav-item active">-->
-                            <!--<a class="nav-link" th:href="@{/parts/all}">All parts</a>-->
-                            <!--</li>-->
                             <li class="nav-item active">
                                 <div class="dropdown">
                                     <a class="nav-link active dropdown-toggle" href="#" role="button"
@@ -66,19 +49,33 @@
                                         Admin
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="nav-link text-dark" th:href="@{/users/all}">All Users</a>
                                         <a class="nav-link text-dark" th:href="@{/categories/add}">Add Category</a>
                                         <a class="nav-link text-dark" th:href="@{/categories/all}">All Categories</a>
-                                        <a class="nav-link text-dark" th:href="@{/users/all}">All Users</a>
+                                        <a class="nav-link text-dark" th:href="@{/cars/add}">Add Car</a>
+                                        <a class="nav-link text-dark" th:href="@{/cars/all}">All Cars</a>
+                                        <a class="nav-link text-dark" th:href="@{/models/add}">Add Car Model</a>
+                                        <a class="nav-link text-dark" th:href="@{/models/all}">All Car Models</a>
                                         <a class="nav-link text-dark" th:href="@{/parts/add}">Add Parts</a>
                                         <a class="nav-link text-dark" th:href="@{/parts/all}">All Parts</a>
-                                        <a class="nav-link text-dark" th:href="@{/cars/add}">Add Car</a>
-                                        <a class="nav-link text-dark" th:href="@{/models/add}">Add Car Model</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item active">
+                                <div class="dropdown">
+                                    <a class="nav-link active dropdown-toggle" href="#" role="button"
+                                       id="ordersMenu"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Orders
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="nav-link text-dark " th:href="@{/orders/all}">New orders</a>
+                                        <a class="nav-link text-dark" th:href="@{/orders/confirmed}">Confirmed orders</a>
+                                        <a class="nav-link text-dark" th:href="@{/orders/finished}">Finished orders</a>
                                     </div>
                                 </div>
                             </li>
                         </th:block>
-
-
                         <li class="nav-item active">
                             <div class="dropdown">
                                 <a class="nav-link active dropdown-toggle" href="#" role="button" id="cartDropdown"
@@ -100,10 +97,7 @@
                             </div>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link " th:href="@{/orders/all}">All orders</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link " th:href="@{/parts/all}">Parts</a>
+                            <a class="nav-link" th:href="@{/orders/myorders}">My Orders</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" th:href="@{/users/profile}">Profile</a>
@@ -112,9 +106,9 @@
                             <a class="nav-link " th:href="@{/contacts}">Contacts</a>
                         </li>
 
-                        <li class="nav-item-active">
-                            <form action="/logout?login" method="post">
-                                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                        <li class="nav-item active">
+                            <form action="/logout" method="post">
+                                <a class="nav-link nav-item active" th:href="@{/logout}">Logout</a>
                             </form>
                         </li>
                     </ul>

@@ -2,7 +2,6 @@ package com.tsvetkov.autoservice.service;
 
 import com.tsvetkov.autoservice.domain.entities.Category;
 import com.tsvetkov.autoservice.domain.models.service.CategoryServiceModel;
-import com.tsvetkov.autoservice.domain.models.view.CategoriesAllViewModel;
 import com.tsvetkov.autoservice.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +23,26 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryServiceModel addCategory(CategoryServiceModel categoryServiceModel) {
-        try {
-            Category category = this.categoryRepository.save(this.modelMapper.map(categoryServiceModel, Category.class));
-            return this.modelMapper.map(category, CategoryServiceModel.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public List<CategoryServiceModel> findAllCategories() {
-        return this.categoryRepository.findAll().stream().map(c -> this.modelMapper.map(c, CategoryServiceModel.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public CategoryServiceModel findCategoryById(String id) {
-        Category category = this.categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+        Category category = this.modelMapper.map(categoryServiceModel, Category.class);
+        category.setDeleted(false);
+        category=this.categoryRepository.save(category);
         return this.modelMapper.map(category, CategoryServiceModel.class);
     }
 
     @Override
-    public CategoryServiceModel editCategory(String id,CategoryServiceModel categoryServiceModel) {
-        Category category = this.categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+    public List<CategoryServiceModel> findAllCategories() {
+        return this.categoryRepository.findAllByDeletedFalse().stream().map(c -> this.modelMapper.map(c, CategoryServiceModel.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public CategoryServiceModel findCategoryById(String id) {
+        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+        return this.modelMapper.map(category, CategoryServiceModel.class);
+    }
+
+    @Override
+    public CategoryServiceModel editCategory(String id, CategoryServiceModel categoryServiceModel) {
+        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
         category.setName(categoryServiceModel.getName());
         return this.modelMapper.map(this.categoryRepository.saveAndFlush(category), CategoryServiceModel.class);
     }
@@ -54,11 +50,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(String id) {
         Category category = this.categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
-        this.categoryRepository.delete(category);
+        category.setDeleted(true);
+        this.categoryRepository.save(category);
     }
 
     @Override
     public CategoryServiceModel findCategoryByName(String name) {
-        return this.modelMapper.map(this.categoryRepository.findCategoriesByName(name),CategoryServiceModel.class);
+        return this.modelMapper.map(this.categoryRepository.findCategoriesByNameAndDeletedFalse(name), CategoryServiceModel.class);
     }
 }

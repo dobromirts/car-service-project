@@ -1,6 +1,5 @@
 package com.tsvetkov.autoservice.domain.models.binding;
 
-import java.time.LocalDate;
 
 public class CartPersonBindingModel {
     private String personName;

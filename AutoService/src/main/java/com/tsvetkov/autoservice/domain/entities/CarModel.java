@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "car_models")
-public class CarModel extends BaseEntity{
+public class CarModel extends BaseEntityExtension{
 
     private String model;
     private String horsePower;

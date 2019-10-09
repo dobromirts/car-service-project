@@ -13,4 +13,10 @@ public interface CarModelService {
     CarModelServiceModel findModelById(String id);
 
     List<CarModelServiceModel> findAllCarModels(String id);
+
+    void deleteModel(String id);
+
+    CarModelServiceModel editModel(String id,CarModelServiceModel carModelServiceModel);
+
+    CarModelServiceModel findModelByModel(String model);
 }

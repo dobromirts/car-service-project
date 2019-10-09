@@ -1,8 +1,5 @@
 package com.tsvetkov.autoservice.domain.models.binding;
 
-import com.tsvetkov.autoservice.domain.entities.Category;
-import com.tsvetkov.autoservice.domain.models.service.CategoryServiceModel;
-import com.tsvetkov.autoservice.domain.models.view.CategoriesAllViewModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
@@ -15,6 +12,7 @@ public class PartAddBindingModel {
     private MultipartFile image;
     private List<String> categories;
     private List<String> carModels;
+    private BigDecimal workPrice;
 
     public PartAddBindingModel() {
     }
@@ -65,5 +63,13 @@ public class PartAddBindingModel {
 
     public void setCarModels(List<String> carModels) {
         this.carModels = carModels;
+    }
+
+    public BigDecimal getWorkPrice() {
+        return workPrice;
+    }
+
+    public void setWorkPrice(BigDecimal workPrice) {
+        this.workPrice = workPrice;
     }
 }

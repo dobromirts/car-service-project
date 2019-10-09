@@ -12,50 +12,77 @@
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="d-none d-md-flex col-md-4 col-lg-4 bg-image-home"></div>
-            <div class="col-md-8 col-lg-6">
+            <div class="col-md-8 col-lg-8">
                 <div class="login d-flex align-items-center py-5">
                     <div class="container ml-5">
-                        <div class="jumbotron">
-                            <h1 class="text-center text-dark">Add Parts</h1>
-                            <form id="add-product-form" class="form w-35 mx-auto" th:action="@{/parts/add}" method="post"
-                                  enctype="multipart/form-data">
+                        <div class="jumbotron bg-light mt-5">
+                            <h1 class="text-center font-weight-bolder">Add Part</h1>
+                            <hr class="hr-2 bg-dark w-75">
+                            <form id="add-product-form" class="form w-35 mx-auto" th:action="@{/parts/add}"
+                                  method="post"
+                                  enctype="multipart/form-data" th:object="${model}">
                                 <div class="form-group">
                                     <label for="add-product-name" class="font-weight-bold">Name</label>
-                                    <input type="text" class="form-control text-center" id="add-product-name" name="name">
+                                    <input type="text" class="form-control text-center" id="add-product-name"
+                                           name="name" th:value="*{name}" required>
+                                    <th:block th:if="${#fields.hasErrors('name')}">
+                                        <small style="color: red" th:errors="*{name}"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
                                     <label for="add-product-description" class="font-weight-bold">Description</label>
-                                    <textarea name="description" id="add-product-description" class="form-control" rows="5"></textarea>
+                                    <textarea name="description" id="add-product-description" class="form-control"
+                                              rows="5" th:value="*{description}"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="add-product-price" class="font-weight-bold">Price</label>
-                                    <input type="number" step="any" class="form-control text-center" id="add-product-price" name="price">
+                                    <input type="number" step="any" class="form-control text-center"
+                                           id="add-product-price" name="price" th:value="*{price}" required>
+                                    <th:block th:if="${#fields.hasErrors('price')}">
+                                        <small style="color: red" th:errors="*{price}"></small>
+                                    </th:block>
+                                </div>
+                                <div class="form-group">
+                                    <label for="add-work-price" class="font-weight-bold">Work Price</label>
+                                    <input type="number" step="any" class="form-control text-center" id="add-work-price"
+                                           name="workPrice" th:value="*{workPrice}" required>
+                                    <th:block th:if="${#fields.hasErrors('workPrice')}">
+                                        <small style="color: red" th:errors="*{workPrice}"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
                                     <label for="add-product-categories" class="font-weight-bold">Categories</label>
-                                    <select multiple="multiple" class="form-control" id="add-product-categories" name="categories">
+                                    <select multiple="multiple" class="form-control" id="add-product-categories"
+                                            name="categories" th:value="*{categories}" required>
                                         <option selected="" disabled="">--- Select Categories ---</option>
                                         <!--<th:block th:each="category, iter: ${model}">-->
-                                            <!--<option th:value="${category.id}" th:text="${category.name}">}</option>-->
+                                        <!--<option th:value="${category.id}" th:text="${category.name}">}</option>-->
                                         <!--</th:block>-->
                                     </select>
+                                    <th:block th:if="${#fields.hasErrors('categories')}">
+                                        <small style="color: red" th:errors="*{categories}"></small>
+                                    </th:block>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="add-product-models" class="font-weight-bold">Models</label>
-                                    <select multiple="multiple" class="form-control" id="add-product-models" name="carModels">
+                                    <select multiple="multiple" class="form-control" id="add-product-models"
+                                            name="carModels" th:value="*{carModels}" required>
                                         <option selected="" disabled="">--- Select Models ---</option>
                                         <!--<th:block th:each="category, iter: ${model}">-->
                                         <!--<option th:value="${category.id}" th:text="${category.name}">}</option>-->
                                         <!--</th:block>-->
                                     </select>
+                                    <th:block th:if="${#fields.hasErrors('carModels')}">
+                                        <small style="color: red" th:errors="*{carModels}"></small>
+                                    </th:block>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="add-product-image" class="font-weight-bold">Image</label>
                                     <input type="file" class="form-control-file" id="add-product-image" name="image">
                                 </div>
-                                <hr class="hr-2 bg-dark w-25">
+                                <hr class="hr-2 bg-dark w-75">
                                 <div class="button-holder d-flex justify-content-center">
                                     <button type="submit" class="btn btn-success">Add Product</button>
                                 </div>

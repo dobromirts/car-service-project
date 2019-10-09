@@ -17,6 +17,7 @@
                         <div class="col-md-8">
                             <h1 class="display-4 text-white-50 text-sm-left ">Welcome to DV Service App.</h1>
                         </div>
+
                         <h3 class="text-black mt-5 text-white-50"><a class="text-white"
                                                                   th:href="@{/users/login}">Login</a> if you have an
                             account.</h3>
@@ -28,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="jumbotron">
+        <div class="jumbotron bg-light">
             <h1 class="display-4">Wellcome to DV Service App Beta Version</h1>
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut beatae delectus in quae qui
                 sunt unde! Id iste itaque magni officiis quam reprehenderit rerum, velit voluptate voluptatem? Cumque,
@@ -53,9 +54,10 @@
         </div>
 
     </main>
-    <footer>
-        <th:block th:include="~{fragments/footer}"></th:block>
-    </footer>
+
 </div>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
 </body>
 </html>

@@ -16,18 +16,17 @@
                 <div class="login  align-items-center py-5">
                     <h1 class="text-center text-dark mt-4">Edit Profile</h1>
                     <hr class="hr-2 bg-dark w-25">
-                    <form class="form w-25 mx-auto" th:action="@{/users/edit}" th:method="patch" th:object="${model}">
+                    <form class="form w-25 mx-auto" th:action="@{/users/edit}" th:method="post" th:object="${model}">
                         <div class="form-group">
                             <label for="username" class="font-weight-bold">Username</label>
-                            <input type="text" th:value="*{username}" class="form-control" name="username" id="username"
-                                   readonly>
+                            <input type="text"  class="form-control" name="username" id="username" readonly th:value="*{username}">
                         </div>
                         <div class="form-group">
-                            <label for="oldPassword" class="font-weight-bold">Old Password</label>
+                            <label for="oldPassword" class="font-weight-bold">Old Password *</label>
                             <input th:value="*{oldPassword}" type="password" class="form-control" id="oldPassword"
                                    placeholder="Password..." name="oldPassword" required>
                             <th:block th:if="${#fields.hasErrors('oldPassword')}">
-                                <small th:errors="*{oldPassword}" class="error"></small>
+                                <small th:errors="*{oldPassword}" style="color: red"></small>
                             </th:block>
                         </div>
                         <div class="form-group">
@@ -35,7 +34,7 @@
                             <input th:value="*{password}" type="password" class="form-control" id="password"
                                    placeholder="New Password..." name="password">
                             <th:block th:if="${#fields.hasErrors('password')}">
-                                <small th:errors="*{password}" class="error"></small>
+                                <small th:errors="*{password}" style="color: red"></small>
                             </th:block>
                         </div>
                         <div class="form-group">
@@ -43,15 +42,15 @@
                             <input th:value="*{confirmPassword}" type="password" class="form-control"
                                    id="confirmPassword" placeholder="Confirm New Password..." name="confirmPassword">
                             <th:block th:if="${#fields.hasErrors('password')}">
-                                <small th:errors="*{password}" class="error"></small>
-                            </th:block>
+                            <small th:errors="*{password}" style="color: red"></small>
+                        </th:block>
                         </div>
                         <div class="form-group">
                             <label for="email" class="font-weight-bold">Email</label>
                             <input th:value="*{email}" type="email" class="form-control" id="email"
                                    placeholder="Email..." name="email">
                             <th:block th:if="${#fields.hasErrors('email')}">
-                                <small th:errors="*{email}" class="error"></small>
+                                <small th:errors="*{email}" style="color: red"></small>
                             </th:block>
                         </div>
                         <hr class="hr-2 bg-dark">
@@ -59,6 +58,9 @@
                             <button type="submit" class="btn btn-dark">Edit</button>
                         </div>
                     </form>
+
+                        <p class="font-weight-bolder text-center text-danger w-25 mx-auto mt-4">Fields with * are required</p>
+
                 </div>
             </div>
         </div>

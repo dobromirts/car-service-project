@@ -4,6 +4,7 @@ public class CarServiceModel {
     private String id;
     private String brand;
     private String imageUrl;
+    private Boolean isDeleted;
 
     public CarServiceModel() {
     }
@@ -30,5 +31,13 @@ public class CarServiceModel {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

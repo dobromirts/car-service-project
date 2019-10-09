@@ -59,10 +59,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public UserServiceModel login(UserServiceModel userServiceModel) {
-        return null;
-    }
 
     @Override
     public UserServiceModel findUserByUsername(String username) {
@@ -75,15 +71,15 @@ public class UserServiceImpl implements UserService {
         User user = this.userRepository.findByUsername(userServiceModel.getUsername()).orElseThrow(() -> new UsernameNotFoundException("No such username"));
 
         if (!this.bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new IllegalArgumentException("Incorrect old password");
-        } else {
-            user.setPassword(this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()));
+            throw new IllegalArgumentException("Incorrect old password!");
         }
-        if (!user.getEmail().equals(userServiceModel.getEmail())) {
-            user.setEmail(userServiceModel.getEmail());
-        }
-        this.userRepository.saveAndFlush(user);
-        return this.modelMapper.map(user, UserServiceModel.class);
+        user.setPassword(userServiceModel.getPassword() != null ?
+                this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()) :
+                user.getPassword());
+        user.setEmail(userServiceModel.getEmail());
+
+
+        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
     }
 
     @Override
@@ -99,27 +95,26 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public void editAuthority(String id) {
-        User user=this.userRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("No such username"));
-        UserServiceModel userServiceModel=this.modelMapper.map(user,UserServiceModel.class);
+        User user = this.userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("No such username"));
+        UserServiceModel userServiceModel = this.modelMapper.map(user, UserServiceModel.class);
 
-        boolean hasAuthority=false;
+        boolean hasAuthority = false;
 
         for (RoleServiceModel authority : userServiceModel.getAuthorities()) {
-            if (authority.getAuthority().equals("ROLE_ADMIN")){
-                hasAuthority=true;
+            if (authority.getAuthority().equals("ROLE_ADMIN")) {
+                hasAuthority = true;
             }
         }
 
-        if (hasAuthority){
+        if (hasAuthority) {
             userServiceModel.getAuthorities().clear();
             userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
-        }else {
+        } else {
             userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_ADMIN"));
         }
 
-        this.userRepository.saveAndFlush(this.modelMapper.map(userServiceModel,User.class));
+        this.userRepository.saveAndFlush(this.modelMapper.map(userServiceModel, User.class));
     }
 }

@@ -5,8 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class CarModelAddBindingModel {
     private String model;
-
-
     private String horsePower;
     private String car;
     private MultipartFile image;

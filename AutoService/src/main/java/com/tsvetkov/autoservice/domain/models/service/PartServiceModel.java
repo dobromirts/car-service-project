@@ -13,6 +13,10 @@ public class PartServiceModel {
     private String imageUrl;
     private List<CategoryServiceModel> categories;
     private List<CarModelServiceModel> carModels;
+    private BigDecimal workPrice;
+
+    private Boolean isDeleted;
+
 
     public PartServiceModel() {
     }
@@ -71,5 +75,21 @@ public class PartServiceModel {
 
     public void setCarModels(List<CarModelServiceModel> carModels) {
         this.carModels = carModels;
+    }
+
+    public BigDecimal getWorkPrice() {
+        return workPrice;
+    }
+
+    public void setWorkPrice(BigDecimal workPrice) {
+        this.workPrice = workPrice;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

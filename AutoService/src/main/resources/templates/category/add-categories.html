@@ -12,20 +12,24 @@
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="d-none d-md-flex col-md-4 col-lg-4 bg-image-home"></div>
-            <div class="col-md-8 col-lg-6">
+            <div class="col-md-8 col-lg-8">
                 <div class="login d-flex align-items-center py-5">
-                    <div class="container ml-5">
-                        <div class="jumbotron">
-                            <form class="mx-auto w-25" th:method="post" th:action="@{/categories/add}" enctype="multipart/form-data">
+                    <div class="container ml-2">
+                        <div class="jumbotron bg-light">
+                            <h1 class="text-center font-weight-bold mb-2">Add Category</h1>
+                            <hr class="hr-2 bg-dark w-75">
+                            <form class="mx-auto w-25" th:method="post" th:action="@{/categories/add}" enctype="multipart/form-data" th:object="${model}">
                                 <div class="form-group">
-                                    <label for="name" class="text-black mb-1">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Category name..." name="name">
+                                    <label for="name" class="font-weight-bold mb-2">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Category name..." name="name" th:value="*{name}">
+                                    <th:block th:if="${#fields.hasErrors('name')}">
+                                        <small th:errors="*{name}" style="color: red"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
-                                    <label for="add-category-image" class="font-weight-bold">Image</label>
-                                    <input type="file" class="form-control-file" id="add-category-image" name="image">
+                                    <label for="add-category-image" class="font-weight-bold mb-2">Upload image</label>
+                                    <input type="file" class="form-control-file" id="add-category-image" name="image" required>
                                 </div>
-                                <hr class="bg-hero hr-2"/>
                                 <div class="button-holder mt-3 d-flex justify-content-center">
                                     <button type="submit" class="btn bg-hero glow-button">Add category</button>
                                 </div>

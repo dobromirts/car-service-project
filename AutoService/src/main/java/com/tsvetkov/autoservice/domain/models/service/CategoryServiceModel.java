@@ -5,6 +5,8 @@ public class CategoryServiceModel {
     private String name;
     private String imageUrl;
 
+    private Boolean isDeleted;
+
     public CategoryServiceModel() {
     }
 
@@ -30,5 +32,13 @@ public class CategoryServiceModel {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

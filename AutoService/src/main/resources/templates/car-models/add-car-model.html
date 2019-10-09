@@ -12,40 +12,54 @@
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="d-none d-md-flex col-md-4 col-lg-4 bg-image-home"></div>
-            <div class="col-md-8 col-lg-6">
+            <div class="col-md-8 col-lg-8">
                 <div class="login d-flex align-items-center py-5">
-                    <div class="container ml-5">
-                        <div class="jumbotron">
-                            <h1 class="text-center text-dark">Add Car Model</h1>
-                            <form id="add-product-form" class="form w-35 mx-auto" th:action="@{/models/add}" method="post"
-                                  enctype="multipart/form-data">
+                    <div class="container ml-2">
+                        <div class="jumbotron bg-light">
+                            <h1 class="text-center font-weight-bold mb-2">Add Car Model</h1>
+                            <hr class="hr-2 bg-dark w-75">
+                            <form id="add-product-form" class="form w-35 mx-auto" th:action="@{/models/add}"
+                                  method="post"
+                                  enctype="multipart/form-data" th:object="${model}">
                                 <div class="form-group">
                                     <label for="add-model-name" class="font-weight-bold">Model</label>
-                                    <input type="text" class="form-control text-center" id="add-model-name" name="model">
+                                    <input type="text" class="form-control text-center" id="add-model-name" name="model"
+                                           required
+                                           th:value="*{model}">
+                                    <th:block th:if="${#fields.hasErrors('model')}">
+                                        <small th:errors="*{model}" style="color: red"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
                                     <label for="add-model-horse-power" class="font-weight-bold">Horse power</label>
-                                    <input type="text" class="form-control text-center" id="add-model-horse-power" name="horsePower">
+                                    <input type="number" min="1" class="form-control text-center"
+                                           id="add-model-horse-power" name="horsePower" required
+                                           th:value="*{horsePower}">
+                                    <th:block th:if="${#fields.hasErrors('horsePower')}">
+                                        <small th:errors="*{horsePower}" style="color: red"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
                                     <label for="add-model-cars" class="font-weight-bold">Cars</label>
-                                    <select multiple="multiple" class="form-control" id="add-model-cars" name="car">
+                                    <select multiple="multiple" class="form-control" id="add-model-cars" name="car"
+                                            required>
                                         <option selected="" disabled="">--- Select Car ---</option>
                                         <!--<th:block th:each="category, iter: ${model}">-->
-                                            <!--<option th:value="${category.id}" th:text="${category.name}">}</option>-->
+                                        <!--<option th:value="${category.id}" th:text="${category.name}">}</option>-->
                                         <!--</th:block>-->
                                     </select>
                                 </div>
 
                                 <!--<div class="form-group">-->
-                                    <!--<label for="add-product-image" class="font-weight-bold">Image</label>-->
-                                    <!--<input type="file" class="form-control-file" id="add-product-image" name="image">-->
+                                <!--<label for="add-product-image" class="font-weight-bold">Image</label>-->
+                                <!--<input type="file" class="form-control-file" id="add-product-image" name="image">-->
                                 <!--</div>-->
                                 <div class="form-group">
                                     <label for="add-model-image" class="font-weight-bold">Image</label>
-                                    <input type="file" class="form-control-file" id="add-model-image" name="image">
+                                    <input type="file" class="form-control-file" id="add-model-image" name="image"
+                                           required>
                                 </div>
-                                <hr class="hr-2 bg-dark w-25">
+                                <hr class="hr-2 bg-dark w-75">
                                 <div class="button-holder d-flex justify-content-center">
                                     <button type="submit" class="btn btn-success">Add Model</button>
                                 </div>

@@ -12,20 +12,28 @@
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="d-none d-md-flex col-md-4 col-lg-4 bg-image-home"></div>
-            <div class="col-md-8 col-lg-6">
+            <div class="col-md-8 col-lg-8">
                 <div class="login d-flex align-items-center py-5">
-                    <div class="container ml-5">
-                        <div class="jumbotron">
-                            <form class="mx-auto w-25" th:method="post" th:action="@{/cars/add}" enctype="multipart/form-data">
+                    <div class="container ml-2">
+                        <div class="jumbotron bg-light">
+                            <h1 class="text-center font-weight-bold mb-2">Add Car</h1>
+                            <hr class="hr-2 bg-dark w-75">
+                            <form class="mx-auto w-25" th:method="post" th:action="@{/cars/add}"
+                                  enctype="multipart/form-data" th:object="${model}">
                                 <div class="form-group">
-                                    <label for="name" class="text-black mb-1">Brand</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Brand name..." name="brand">
+                                    <label for="name" class="font-weight-bold">Brand</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Brand name..."
+                                           name="brand" required th:value="*{brand}">
+                                    <th:block th:if="${#fields.hasErrors('brand')}">
+                                        <small th:errors="*{brand}" style="color: red"></small>
+                                    </th:block>
                                 </div>
                                 <div class="form-group">
                                     <label for="add-car-image" class="font-weight-bold">Image</label>
-                                    <input type="file" class="form-control-file" id="add-car-image" name="image">
+                                    <input type="file" class="form-control-file" id="add-car-image" name="image"
+                                           required>
                                 </div>
-                                <hr class="bg-hero hr-2"/>
+
                                 <div class="button-holder mt-3 d-flex justify-content-center">
                                     <button type="submit" class="btn bg-hero glow-button">Add car</button>
                                 </div>

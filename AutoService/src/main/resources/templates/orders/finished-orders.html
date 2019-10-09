@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+</header>
+<main>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class=" col-md-4 col-lg-4 bg-image-home"></div>
+            <div class="col-md-8 col-lg-8">
+                <div class="login d-flex align-items-center ">
+                    <div class="container ml-8">
+
+                        <div class="jumbotron bg-light text-center pt-4">
+
+                            <table class="table table-hover w-75 mx-auto">
+                                <h1 class="text-center font-weight-bold">Finished Orders</h1>
+                                <hr class="hr-2 bg-dark w-75">
+                                <tr>
+                                    <th class=" text-monospace">#</th>
+                                    <th class="text-dark">Username</th>
+                                    <th class="text-dark">Total parts price</th>
+                                    <th class="text-dark">Total work price</th>
+                                    <th class="text-dark">Total price</th>
+                                    <th class="text-dark">Phone number</th>
+                                    <th class="text-dark">Finished on</th>
+                                    <th class="text-dark">Made on</th>
+
+                                </tr>
+                                <th:block th:each="order ,iter: ${orders}">
+                                <tr>
+                                    <td th:text="${iter.index+1}"></td>
+                                    <td th:text="${order.user.username}"></td>
+                                    <td th:text="${order.totalPartsPrice}"></td>
+                                    <td th:text="${order.totalWorkPrice}"></td>
+                                    <td th:text="${order.totalPrice}"></td>
+                                    <td th:text="${order.phoneNumber}"></td>
+                                    <td th:text="${order.madeOn}"></td>
+                                    <td th:text="${order.date}"></td>
+                                    <!--<td th:text="${#temporals.format(order.date, 'dd-MM-yyyy HH:mm')}"></td>-->
+
+                                </tr>
+                                </th:block>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</footer>
+</body>
+</html>

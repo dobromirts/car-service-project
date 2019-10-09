@@ -29,6 +29,9 @@
                     <div class="col  text-center mt-4 mb-2">
                         <h4 th:text="${'Price: '+ model.price}+'$'"></h4>
                     </div>
+                    <div class="col  text-center mt-4 mb-2">
+                        <h4 th:text="${'Work Price: '+ model.workPrice}+'$'"></h4>
+                    </div>
                     <hr class="hr-2 bg-dark">
 
                     <!--<div class="button-holder d-flex justify-content-center">-->
@@ -45,7 +48,7 @@
                                 <input id="quantity" class="form-control text-center" type="number" min="1" max="10" step="1" name="quantity" value="1" />
                             </div>
                             <input type="hidden" name="id" th:value="${model.id}">
-                            <button type="submit" class="btn btn-success col  text-center mt-4 mb-2">Order Product</button>
+                            <button type="submit" class="btn btn-success col  text-center mt-4 mb-2">Add to cart</button>
                         </form>
                     </div>
 

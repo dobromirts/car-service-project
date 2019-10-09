@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+</header>
+<main>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="d-none d-md-flex col-md-4 col-lg-4 bg-image-home"></div>
+            <div class="col-md-8 col-lg-8">
+                <div class="login  align-items-center py-5">
+                    <h1 class="text-center font-weight-bold mt-4">Change car name</h1>
+                    <hr class="hr-2 bg-dark w-25">
+                    <form class="form w-25 mx-auto" th:action="@{/cars/edit/{id}(id=${modelId})}" th:method="post" th:object="${model}">
+                        <div class="form-group">
+                            <label for="brand" class="font-weight-bold">Name</label>
+                            <input type="text" th:value="*{brand}" class="form-control" name="brand" id="brand"
+                                   required>
+                            <th:block th:if="${#fields.hasErrors('brand')}">
+                                <small th:errors="*{brand}" style="color: red"></small>
+                            </th:block>
+                        <hr class="hr-2 bg-dark">
+                        <div class="button-holder d-flex justify-content-center">
+                            <button type="submit" class="btn btn-dark">Edit</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</footer>
+</body>
+</html>

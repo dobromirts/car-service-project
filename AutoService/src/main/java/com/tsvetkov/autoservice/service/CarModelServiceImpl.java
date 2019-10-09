@@ -19,6 +19,8 @@ public class CarModelServiceImpl implements CarModelService {
     private final ModelMapper modelMapper;
     private final CarRepository carRepository;
 
+    //TODO ONLY CARSERVICE SHOULD STAY HERE WITHOUT REPOSITORY ???
+
     @Autowired
     public CarModelServiceImpl(CarModelRepository carModelRepository, CarService carService, ModelMapper modelMapper, CarRepository carRepository) {
         this.carModelRepository = carModelRepository;
@@ -33,13 +35,14 @@ public class CarModelServiceImpl implements CarModelService {
 
         CarModel carModel = this.modelMapper.map(carModelServiceModel, CarModel.class);
         carModel.setCar(car);
+        carModel.setDeleted(false);
 
         return this.modelMapper.map(this.carModelRepository.saveAndFlush(carModel), CarModelServiceModel.class);
     }
 
     @Override
     public List<CarModelServiceModel> findAllModels() {
-        return this.carModelRepository.findAll().stream().map(m -> this.modelMapper.map(m, CarModelServiceModel.class)).collect(Collectors.toList());
+        return this.carModelRepository.findAllByDeletedFalse().stream().map(m -> this.modelMapper.map(m, CarModelServiceModel.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -51,7 +54,30 @@ public class CarModelServiceImpl implements CarModelService {
     @Override
     public List<CarModelServiceModel> findAllCarModels(String id) {
         Car car=this.carRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid car!"));
-        List<CarModel> allCarsModelsByCar = this.carModelRepository.findAllCarsModelsByCar(car);
+        List<CarModel> allCarsModelsByCar = this.carModelRepository.findAllCarsModelsByCarAndDeletedFalse(car);
         return allCarsModelsByCar.stream().map(m->this.modelMapper.map(m,CarModelServiceModel.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteModel(String id) {
+        CarModel carModel=this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid model!"));
+        carModel.setDeleted(true);
+        this.carModelRepository.save(carModel);
+    }
+
+    @Override
+    public CarModelServiceModel editModel(String id, CarModelServiceModel carModelServiceModel) {
+        CarModel carModel=this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid model"));
+        carModel.setHorsePower(carModelServiceModel.getHorsePower());
+        carModel.setCar(this.modelMapper.map(carModelServiceModel.getCar(),Car.class));
+        carModel.setModel(carModelServiceModel.getModel());
+
+
+        return this.modelMapper.map(this.carModelRepository.saveAndFlush(carModel),CarModelServiceModel.class);
+    }
+
+    @Override
+    public CarModelServiceModel findModelByModel(String model) {
+        return this.modelMapper.map(this.carModelRepository.findModelByModelAndDeletedFalse(model),CarModelServiceModel.class);
     }
 }
