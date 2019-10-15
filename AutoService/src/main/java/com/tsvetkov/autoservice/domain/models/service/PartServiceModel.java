@@ -15,7 +15,7 @@ public class PartServiceModel {
     private List<CarModelServiceModel> carModels;
     private BigDecimal workPrice;
 
-    private Boolean isDeleted;
+
 
 
     public PartServiceModel() {
@@ -85,11 +85,5 @@ public class PartServiceModel {
         this.workPrice = workPrice;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
 
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
 }

@@ -3,6 +3,7 @@ package com.tsvetkov.autoservice.service;
 import com.tsvetkov.autoservice.domain.entities.Car;
 import com.tsvetkov.autoservice.domain.entities.CarModel;
 import com.tsvetkov.autoservice.domain.models.service.CarModelServiceModel;
+import com.tsvetkov.autoservice.domain.models.service.CarServiceModel;
 import com.tsvetkov.autoservice.repository.CarModelRepository;
 import com.tsvetkov.autoservice.repository.CarRepository;
 import org.modelmapper.ModelMapper;
@@ -17,24 +18,20 @@ public class CarModelServiceImpl implements CarModelService {
     private final CarModelRepository carModelRepository;
     private final CarService carService;
     private final ModelMapper modelMapper;
-    private final CarRepository carRepository;
-
-    //TODO ONLY CARSERVICE SHOULD STAY HERE WITHOUT REPOSITORY ???
 
     @Autowired
-    public CarModelServiceImpl(CarModelRepository carModelRepository, CarService carService, ModelMapper modelMapper, CarRepository carRepository) {
+    public CarModelServiceImpl(CarModelRepository carModelRepository, CarService carService, ModelMapper modelMapper) {
         this.carModelRepository = carModelRepository;
         this.carService = carService;
         this.modelMapper = modelMapper;
-        this.carRepository = carRepository;
     }
 
     @Override
     public CarModelServiceModel addCarModel(String id, CarModelServiceModel carModelServiceModel) {
-        Car car = this.carRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid car!"));
+        CarServiceModel carServiceModel=this.carService.findCarById(id);
 
         CarModel carModel = this.modelMapper.map(carModelServiceModel, CarModel.class);
-        carModel.setCar(car);
+        carModel.setCar(this.modelMapper.map(carServiceModel,Car.class));
         carModel.setDeleted(false);
 
         return this.modelMapper.map(this.carModelRepository.saveAndFlush(carModel), CarModelServiceModel.class);
@@ -53,8 +50,9 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public List<CarModelServiceModel> findAllCarModels(String id) {
-        Car car=this.carRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid car!"));
-        List<CarModel> allCarsModelsByCar = this.carModelRepository.findAllCarsModelsByCarAndDeletedFalse(car);
+        CarServiceModel carServiceModel=this.carService.findCarById(id);
+
+        List<CarModel> allCarsModelsByCar = this.carModelRepository.findAllCarsModelsByCarAndDeletedFalse(this.modelMapper.map(carServiceModel,Car.class));
         return allCarsModelsByCar.stream().map(m->this.modelMapper.map(m,CarModelServiceModel.class)).collect(Collectors.toList());
     }
 

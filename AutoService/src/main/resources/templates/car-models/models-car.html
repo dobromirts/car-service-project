@@ -8,39 +8,33 @@
 <header>
     <th:block th:include="~{fragments/nav-bar}"></th:block>
 </header>
-    <main class="mt-3">
-        <div class="jumbotron big-banner" style="height: 350px; padding-top: 200px">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col col-md-12">
-                        <div class="col-md-8">
-                            <h1 class="display-4 text-white-50 text-sm-left ">Welcome to DV Service App.</h1>
+<main class="mt-3">
+    <div class="jumbotron small-banner" style="height: 90px; padding-top: 90px">
+    </div>
+    <div class="jumbotron bg-light">
+        <div class="container-fluid">
+            <th:block th:if="${model.empty}">
+                <h5 class="text-center text-dark font-weight-bold py-3 mt-3">No Models Available </h5>
+            </th:block>
+            <div class="row mb-4 d-flex flex-wrap">
+
+                <th:block th:each="carModel: ${model}"th:object="${model}">
+                    <div class="print-scheduled home-doc rounded">
+                        <h5 class="text-center text-dark font-weight-bold py-3 mt-3" th:text="${carModel.model}"></h5>
+                        <div class="text-center"><a th:href ="@{/models/{id}(id=${carModel.id})}"  ><img th:src="${carModel.imageUrl}" width="220" height="220"  alt="Models"></a></div>
+                        <hr class="bg-dark w-75">
+                        <div class="buttons-holder w-75 mx-auto d-flex justify-content-center">
+                            <a th:href ="@{/models/{id}(id=${carModel.id})}" class="btn btn-dark text-white font-weight-bold mb-3" >Parts</a>
                         </div>
                     </div>
-
-                </div>
+                </th:block>
             </div>
         </div>
-        <div class="jumbotron bg-light">
-            <div class="container-fluid">
-                <div class="row mb-4 d-flex flex-wrap">
-                    <th:block th:each="carModel: ${model}">
-                        <div class="print-scheduled home-doc rounded">
-                            <h5 class="text-center text-dark font-weight-bold py-3 mt-3" th:text="${carModel.model}"></h5>
-                            <div class="text-center"><a th:href ="@{/models/{id}(id=${carModel.id})}"  ><img th:src="${carModel.imageUrl}" width="160"  alt="Models"></a></div>
-                            <hr class="bg-dark w-75">
-                            <div class="buttons-holder w-75 mx-auto d-flex justify-content-center">
-                                <a th:href ="@{/models/{id}(id=${carModel.id})}" class="btn btn-dark text-white font-weight-bold mb-3" >Parts</a>
-                            </div>
-                        </div>
-                    </th:block>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer>
-        <th:block th:include="~{fragments/footer}"></th:block>
-    </footer>
+    </div>
+</main>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
 </div>
 </body>
 </html>

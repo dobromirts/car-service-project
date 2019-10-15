@@ -126,7 +126,6 @@ public class CarModelController extends BaseController {
 
         modelAndView.addObject("model", carModelEditBindingModel);
         modelAndView.addObject("modelId", id);
-        modelAndView.setViewName("parts/edit-part");
         return view("car-models/edit-model", modelAndView);
     }
 

@@ -15,6 +15,9 @@
             <div class="col-md-8 col-lg-8">
                 <div class="login d-flex align-items-center ">
                     <div class="container ml-8">
+                        <div class="jumbotron bg-light text-center pt-4">
+                            <h3>You can see only your orders which are confirmed by administrator!</h3>
+                        </div>
 
                         <div class="jumbotron bg-light text-center pt-4">
 
@@ -33,22 +36,24 @@
 
                                 </tr>
                                 <th:block th:each="order ,iter: ${orders}">
-                                <tr>
-                                    <td th:text="${iter.index+1}"></td>
-                                    <td th:text="${order.user.username}"></td>
-                                    <td th:text="${order.totalPartsPrice}"></td>
-                                    <td th:text="${order.totalWorkPrice}"></td>
-                                    <td th:text="${order.totalPrice}"></td>
-                                    <td th:text="${order.phoneNumber}"></td>
-                                    <td th:text="${order.madeOn}"></td>
-                                    <td th:text="${order.date}"></td>
-                                    <!--<td th:text="${#temporals.format(order.date, 'dd-MM-yyyy HH:mm')}"></td>-->
-                                    <td>
-                                        <a th:href="@{/orders/details/{id}(id=${order.getId()})}" class="btn btn-success">Details</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td th:text="${iter.index+1}"></td>
+                                        <td th:text="${order.user.username}"></td>
+                                        <td th:text="${order.totalPartsPrice}"></td>
+                                        <td th:text="${order.totalWorkPrice}"></td>
+                                        <td th:text="${order.totalPrice}"></td>
+                                        <td th:text="${order.phoneNumber}"></td>
+                                        <td th:text="${order.madeOn}"></td>
+                                        <td th:text="${order.date}"></td>
+
+                                        <td>
+                                            <a th:href="@{/orders/details/{id}(id=${order.getId()})}"
+                                               class="btn btn-success">Details</a>
+                                        </td>
+                                    </tr>
                                 </th:block>
                             </table>
+
                         </div>
                     </div>
                 </div>

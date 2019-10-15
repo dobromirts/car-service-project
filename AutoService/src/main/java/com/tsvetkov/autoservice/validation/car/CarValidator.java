@@ -29,7 +29,7 @@ public class CarValidator implements Validator {
             errors.rejectValue("brand","Brand should be between 2 and 10 symbols!","Brand should be between 2 and 10 symbols!");
         }
 
-        if (this.carRepository.findByBrandAndDeletedFalse(carBindingModel.getBrand())!=null){
+        if (this.carRepository.findByBrandAndDeletedFalse(carBindingModel.getBrand()).isPresent()){
             errors.rejectValue("brand","Brand already exists!","Brand already exists!");
         }
     }

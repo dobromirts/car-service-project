@@ -24,7 +24,7 @@ public class PartAddValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         PartAddBindingModel partAddBindingModel= (PartAddBindingModel) o;
-        if (partAddBindingModel.getName().length()<2 || partAddBindingModel.getName().length()>20){
+        if (partAddBindingModel.getName().length()<2 || partAddBindingModel.getName().length()>50){
             errors.rejectValue("name","Name should be between 2 and 10 symbols!","Name should be between 2 and 20 symbols!");
         }
 

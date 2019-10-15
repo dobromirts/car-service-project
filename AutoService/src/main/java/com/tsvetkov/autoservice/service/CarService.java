@@ -12,7 +12,7 @@ public interface CarService {
 
     List<CarServiceModel> findAllCars();
 
-    void deleteCar(String id);
+    CarServiceModel deleteCar(String id);
 
     CarServiceModel editCar(String id,CarServiceModel carServiceModel);
 

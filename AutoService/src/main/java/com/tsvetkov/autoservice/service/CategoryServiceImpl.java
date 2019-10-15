@@ -48,10 +48,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(String id) {
-        Category category = this.categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+    public CategoryServiceModel deleteCategory(String id) {
+        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
         category.setDeleted(true);
-        this.categoryRepository.save(category);
+        return this.modelMapper.map(this.categoryRepository.saveAndFlush(category),CategoryServiceModel.class);
     }
 
     @Override

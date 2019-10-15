@@ -29,7 +29,7 @@ public class CategoryEditValidator implements Validator {
             errors.rejectValue("name","Invalid name","Name should be at least 3 symbols!");
         }
         if (categoryRepository.findCategoriesByNameAndDeletedFalse(categoryEditBindingModel.getName())!=null){
-            errors.rejectValue("name","Invalid name","Category with this name already exists    !");
+            errors.rejectValue("name","Invalid name","Category with this name already exists!");
         }
     }
 }

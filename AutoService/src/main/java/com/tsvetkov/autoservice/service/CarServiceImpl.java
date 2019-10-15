@@ -33,10 +33,10 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
-    public void deleteCar(String id) {
+    public CarServiceModel deleteCar(String id) {
         Car car=this.carRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Car"));
         car.setDeleted(true);
-        this.carRepository.save(car);
+        return this.modelMapper.map(this.carRepository.save(car),CarServiceModel.class);
     }
 
     @Override

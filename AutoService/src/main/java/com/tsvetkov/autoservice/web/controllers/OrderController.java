@@ -7,6 +7,7 @@ import com.tsvetkov.autoservice.service.OrderService;
 import com.tsvetkov.autoservice.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ public class OrderController extends BaseController{
     private final OrderService orderService;
     private  final ModelMapper modelMapper;
 
-    //TODO FINISHED ORDERS AND MAKE VIEW MODEL //and user orders
 
     @Autowired
     public OrderController(OrderService orderService, ModelMapper modelMapper) {
@@ -111,6 +111,8 @@ public class OrderController extends BaseController{
         modelAndView.addObject("orders",this.orderService.findAllUserOrders(principal.getName()));
         return view("orders/user-orders",modelAndView);
     }
+
+
 
     @GetMapping("/details/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

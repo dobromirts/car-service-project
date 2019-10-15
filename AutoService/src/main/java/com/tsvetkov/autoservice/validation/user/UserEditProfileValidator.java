@@ -29,7 +29,7 @@ public class UserEditProfileValidator implements Validator {
     public void validate(Object o, Errors errors) {
         UserEditProfileBindingModel userEditBindingModel = (UserEditProfileBindingModel) o;
 
-        User user = this.userRepository.findByUsername(userEditBindingModel.getUsername()).orElse(null);
+        User user = this.userRepository.findByUsername(userEditBindingModel.getUsername()).orElseThrow(()->new IllegalArgumentException("Invalid User"));
 
         if (!this.bCryptPasswordEncoder.matches(userEditBindingModel.getOldPassword(), user.getPassword())) {
             errors.rejectValue("oldPassword","Wrong passwords!","Wrong password!");

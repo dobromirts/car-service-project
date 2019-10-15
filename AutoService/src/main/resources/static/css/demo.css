@@ -30,6 +30,18 @@
     background-position: center;
 }
 
+.big-banner1 {
+    background-image: url('https://cdn.hipwallpaper.com/i/61/18/lvJc6B.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.small-banner {
+    background-image: url('https://wallpapercave.com/wp/wp1861758.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 
 
 .button {
