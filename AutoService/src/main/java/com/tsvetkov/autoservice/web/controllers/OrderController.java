@@ -113,7 +113,6 @@ public class OrderController extends BaseController{
     }
 
 
-
     @GetMapping("/details/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PageTitle("Confirmed Orders")
@@ -122,6 +121,16 @@ public class OrderController extends BaseController{
         modelAndView.addObject("model",orderServiceModel);
         return view("orders/details-order",modelAndView);
     }
+
+    @GetMapping("/myorder/details/{id}")
+    @PreAuthorize("isAuthenticated()")
+    @PageTitle("Confirmed Orders")
+    public ModelAndView userOrderDetails(@PathVariable String id,ModelAndView modelAndView){
+        OrderServiceModel orderServiceModel=this.orderService.findOrderById(id);
+        modelAndView.addObject("model",orderServiceModel);
+        return view("orders/user-order-details",modelAndView);
+    }
+
 
 
 }

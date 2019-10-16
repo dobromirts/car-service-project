@@ -63,9 +63,9 @@ public class Order extends BaseEntity {
         this.description = description;
     }
 
-    @ManyToMany(targetEntity = Part.class,fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Part.class)
     @JoinTable(name = "orders_parts", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "part_id", referencedColumnName = "id"))
     public List<Part> getParts() {
         return parts;
     }

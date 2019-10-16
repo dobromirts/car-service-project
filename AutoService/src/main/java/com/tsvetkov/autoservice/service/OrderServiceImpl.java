@@ -30,7 +30,8 @@ public class OrderServiceImpl implements OrderService{
         orderServiceModel.setMadeOn(LocalDateTime.now());
         orderServiceModel.setConfirmed(false);
 
-        this.orderRepository.saveAndFlush(this.modelMapper.map(orderServiceModel, Order.class));
+        Order order = this.orderRepository.saveAndFlush(this.modelMapper.map(orderServiceModel, Order.class));
+        System.out.println();
     }
 
     @Override
