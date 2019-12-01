@@ -21,16 +21,49 @@
     height: 2px;
 }
 
-textarea {
-    resize: none;
-}
-
-:root {
-    --input-padding-x: 1.5rem;
-    --input-padding-y: 0.75rem;
-}
 
 .home-doc{
     width: 18%;
     margin: auto;
+}
+
+
+.login,
+.image {
+    min-height: 100vh;
+}
+
+.bg-image {
+    background-image: url('https://wallpapercave.com/wp/iHdYSYU.jpg');
+    min-height: 800px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+
+.bg-image-pages {
+    background-image: url('https://wallpapercave.com/wp/wp3726561.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.big-bannerhome{
+    background-image: url('https://cdn.hipwallpaper.com/i/61/18/lvJc6B.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+.small-banner {
+    background-image: url('https://wallpapercave.com/wp/wp1861758.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+.glow-button:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }

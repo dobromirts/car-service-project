@@ -18,7 +18,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/jss/**","/css/**","/about","/contacts").permitAll()
+                .antMatchers("/js/**","/css/**","/about","/contacts").permitAll()
                 .antMatchers("/","/users/register","/users/login").anonymous()
                 .anyRequest().authenticated()
                 .and()
