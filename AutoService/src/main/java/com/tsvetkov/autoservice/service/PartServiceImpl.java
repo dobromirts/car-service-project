@@ -14,6 +14,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PartServiceImpl implements PartService {
+    private final static String INCORRECT_PART_MESSAGE="Incorrect Part!";
+    private final static String PART_NOT_FOUND_MESSAGE="Part with given id was not found!";
+
     private final PartRepository partRepository;
     private final CategoryService categoryService;
     private final CarModelService carModelService;
@@ -39,13 +42,13 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public PartServiceModel findPartById(String id) {
-        Part part=this.partRepository.findById(id).orElseThrow(()->new PartNotFoundException("Part with given id was not found!"));
+        Part part=this.partRepository.findById(id).orElseThrow(()->new PartNotFoundException(PART_NOT_FOUND_MESSAGE));
         return this.modelMapper.map(part,PartServiceModel.class);
     }
 
     @Override
     public PartServiceModel editPart(PartServiceModel partServiceModel) {
-        Part part=this.partRepository.findById(partServiceModel.getId()).orElseThrow(()->new IllegalArgumentException("Incorrect Part!"));
+        Part part=this.partRepository.findById(partServiceModel.getId()).orElseThrow(()->new IllegalArgumentException(INCORRECT_PART_MESSAGE));
         part.setName(partServiceModel.getName());
         part.setDescription(partServiceModel.getDescription());
         part.setPrice(partServiceModel.getPrice());

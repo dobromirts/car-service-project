@@ -16,6 +16,7 @@ import com.tsvetkov.autoservice.validation.part.PartAddValidator;
 import com.tsvetkov.autoservice.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -161,6 +162,15 @@ public class PartController extends BaseController {
 
         modelAndView.addObject("model", partDetailsViewModels);
         modelAndView.setViewName("parts/parts-model");
+        return modelAndView;
+    }
+
+    @ExceptionHandler(PartNotFoundException.class)
+    public ModelAndView handleException(PartNotFoundException exception) {
+        ModelAndView modelAndView = new ModelAndView("error/part-error");
+        modelAndView.addObject("message", exception.getMessage());
+        modelAndView.setStatus(HttpStatus.NOT_FOUND);
+
         return modelAndView;
     }
 

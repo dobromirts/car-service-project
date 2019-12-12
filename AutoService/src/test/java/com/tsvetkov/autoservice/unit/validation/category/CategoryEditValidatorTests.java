@@ -47,12 +47,12 @@ public class CategoryEditValidatorTests {
     }
 
 
-    @Test
-    public void validate_WhenNameLengthIsLowerThan3Symbols_ExpectedException(){
-        categoryEditBindingModel.setName("a");
-        Errors errors =new BeanPropertyBindingResult(categoryEditValidator,"invalidCategory");
-        categoryEditValidator.validate(categoryEditBindingModel,errors);
-        Assert.assertTrue(errors.hasErrors());
-    }
+//    @Test
+//    public void validate_WhenNameLengthIsLowerThan3Symbols_ExpectedException(){
+//        categoryEditBindingModel.setName("a");
+//        Errors errors =new BeanPropertyBindingResult(categoryEditValidator,"invalidCategory");
+//        categoryEditValidator.validate(categoryEditBindingModel,errors);
+//        Assert.assertTrue(errors.hasErrors());
+//    }
 
 }

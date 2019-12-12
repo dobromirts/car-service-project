@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+    private final static String INVALID_CATEGORY_MESSAGE="Invalid category";
+
     private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
 
@@ -36,20 +38,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryServiceModel findCategoryById(String id) {
-        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException(INVALID_CATEGORY_MESSAGE));
         return this.modelMapper.map(category, CategoryServiceModel.class);
     }
 
     @Override
     public CategoryServiceModel editCategory(String id, CategoryServiceModel categoryServiceModel) {
-        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException(INVALID_CATEGORY_MESSAGE));
         category.setName(categoryServiceModel.getName());
         return this.modelMapper.map(this.categoryRepository.saveAndFlush(category), CategoryServiceModel.class);
     }
 
     @Override
     public CategoryServiceModel deleteCategory(String id) {
-        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+        Category category = this.categoryRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new IllegalArgumentException(INVALID_CATEGORY_MESSAGE));
         category.setDeleted(true);
         return this.modelMapper.map(this.categoryRepository.saveAndFlush(category),CategoryServiceModel.class);
     }

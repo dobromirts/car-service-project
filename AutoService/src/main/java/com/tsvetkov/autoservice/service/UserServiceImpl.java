@@ -19,6 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private final static String USERNAME_NOT_FOUND_MESSAGE="Username not found!";
+    private final static String NO_SUCH_USERNAME_MESSAGE="No such username";
+
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final ModelMapper modelMapper;
@@ -34,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        return this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(USERNAME_NOT_FOUND_MESSAGE));
     }
 
     @Override
@@ -62,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel findUserByUsername(String username) {
-        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No such username"));
+        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(NO_SUCH_USERNAME_MESSAGE));
         return this.modelMapper.map(user, UserServiceModel.class);
     }
 
@@ -97,7 +100,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editAuthority(String id) {
-        User user = this.userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("No such username"));
+        User user = this.userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException(NO_SUCH_USERNAME_MESSAGE));
         UserServiceModel userServiceModel = this.modelMapper.map(user, UserServiceModel.class);
 
         boolean hasAuthority = false;

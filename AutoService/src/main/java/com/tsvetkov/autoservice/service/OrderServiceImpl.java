@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService{
+    private final static String INVALID_ORDER_MESSAGE="Invalid order";
+
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
     private final UserService userService;
@@ -50,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public OrderServiceModel findOrderById(String id) {
-        Order order=this.orderRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid order"));
+        Order order=this.orderRepository.findById(id).orElseThrow(()->new IllegalArgumentException(INVALID_ORDER_MESSAGE));
         return this.modelMapper.map(order,OrderServiceModel.class);
     }
 
@@ -67,7 +69,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public void finishOrder(String id) {
-        Order order=this.orderRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid order!"));
+        Order order=this.orderRepository.findById(id).orElseThrow(()->new IllegalArgumentException(INVALID_ORDER_MESSAGE));
         order.setFinished(true);
         orderRepository.save(order);
     }

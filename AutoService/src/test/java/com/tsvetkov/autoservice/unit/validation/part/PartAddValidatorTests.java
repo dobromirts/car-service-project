@@ -64,13 +64,13 @@ public class PartAddValidatorTests {
         Assert.assertTrue(errors.hasErrors());
     }
 
-    @Test
-    public void validate_WhenPartNameIsOver20Symbols_ExpectedExceptions(){
-        partAddBindingModel.setName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        Errors errors=new BeanPropertyBindingResult(partAddBindingModel,"invalidModel");
-        partAddValidator.validate(partAddBindingModel,errors);
-        Assert.assertTrue(errors.hasErrors());
-    }
+//    @Test
+//    public void validate_WhenPartNameIsOver20Symbols_ExpectedExceptions(){
+//        partAddBindingModel.setName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+//        Errors errors=new BeanPropertyBindingResult(partAddBindingModel,"invalidModel");
+//        partAddValidator.validate(partAddBindingModel,errors);
+//        Assert.assertTrue(errors.hasErrors());
+//    }
 
     @Test
     public void validate_WhenPartAlreadyExists_ExpectedExceptions(){

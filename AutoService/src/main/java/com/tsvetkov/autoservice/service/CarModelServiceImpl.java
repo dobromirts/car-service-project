@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CarModelServiceImpl implements CarModelService {
+    private final static String INVALID_MODEL_MESSAGE="Invalid model";
+
     private final CarModelRepository carModelRepository;
     private final CarService carService;
     private final ModelMapper modelMapper;
@@ -44,7 +46,7 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public CarModelServiceModel findModelById(String id) {
-        CarModel carModel = this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid model"));
+        CarModel carModel = this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException(INVALID_MODEL_MESSAGE));
         return this.modelMapper.map(carModel,CarModelServiceModel.class);
     }
 
@@ -58,14 +60,14 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public void deleteModel(String id) {
-        CarModel carModel=this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid model!"));
+        CarModel carModel=this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException(INVALID_MODEL_MESSAGE));
         carModel.setDeleted(true);
         this.carModelRepository.save(carModel);
     }
 
     @Override
     public CarModelServiceModel editModel(String id, CarModelServiceModel carModelServiceModel) {
-        CarModel carModel=this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid model"));
+        CarModel carModel=this.carModelRepository.findById(id).orElseThrow(()->new IllegalArgumentException(INVALID_MODEL_MESSAGE));
         carModel.setHorsePower(carModelServiceModel.getHorsePower());
         carModel.setCar(this.modelMapper.map(carModelServiceModel.getCar(),Car.class));
         carModel.setModel(carModelServiceModel.getModel());
